@@ -22,10 +22,10 @@ class Base(object):
         with open(self.user_json, "r") as f:
             data = json.loads(f.read())
         if time_to_str:
-            for k, v in data.items():
+            for username, v in data.items():
                 v["create_time"] = timestamp_to_string(v["create_time"])
                 v["update_time"] = timestamp_to_string(v["update_time"])
-            data[username] = v
+                data[username] = v
         return data
 
     def _write_user(self, **user):
@@ -54,10 +54,10 @@ class Base(object):
 if __name__ == "__main__":
     user_path = os.path.join(os.getcwd(), "storage", "user.json")
     gift_path = os.path.join(os.getcwd(), "storage", "gift.json")
-    print(user_path, gift_path)
+    # print(user_path, gift_path)
     base = Base(user_path, gift_path)
 
-    # users = base._read_users()
-    # print(users)
 
-    base._write_user(username="admin", role="admin")
+    # base._write_user(username="user1", role="user")
+    users = base._read_users(True)
+    print(users)
